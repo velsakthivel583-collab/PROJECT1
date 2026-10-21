@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate - NBRM Foundation</title>
+<link rel="icon" type="png" href="Seedling Sunrise Trust Emblem.png">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f8f6;
+    color: #333;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 6%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px #00000012;
+}
+
+.logo {
+    color: #800020;
+    font-size: 23px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span {
+    font-size: 13px;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    color: #800020;
+}
+
+
+.hero {
+    min-height: 320px;
+    background:
+      linear-gradient(#0007, #0007),
+      url("https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1400&q=80")
+      center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.hero h1 {
+    font-size: 43px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.info, .donation-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px #00000010;
+}
+
+h2 {
+    color: red;
+    margin-bottom: 18px;
+}
+
+.info p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.info ul {
+    padding-left: 20px;
+    line-height: 2;
+}
+
+.amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.amounts button {
+    padding: 15px;
+    border: 2px solid #218454;
+    background: white;
+    color: #155b3b;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+
+.amounts button:hover,
+.amounts button.active {
+    background: #218454;
+    color: white;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.donate-btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px;
+    background: #155b3b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.donate-btn:hover {
+    background: #218454;
+}
+
+#message {
+    margin-top: 15px;
+    line-height: 1.6;
+    color: #155b3b;
+}
+
+footer {
+    background: #123d2a;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    line-height: 1.8;
+}
+
+
+#payment, #history {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qr {
+    width: 200px;
+    max-width: 100%;
+    display: block;
+    margin: 15px auto;
+}
+
+.item {
+    background: #f5f5f5;
+    padding: 10px;
+    margin-top: 10px;
+    overflow-wrap: anywhere;
+}
+.donate-widget {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 145px;
+    padding: 12px;
+    background: #ffffff;
+    border: 2px solid #176b45;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px #0002;
+    text-align: center;
+    z-index: 9999;
+}
+
+.donate-widget h3 {
+    color: #176b45;
+    font-size: 17px;
+    margin: 0 0 10px;
+}
+
+.donate-widget img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.donate-widget p {
+    font-size: 12px;
+    margin: 8px 0 0;
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    .donate-widget {
+        top: auto;
+        bottom: 15px;
+        right: 10px;
+        transform: none;
+        width: 100px;
+        padding: 8px;
+    }
+}
+
+@media(max-width: 700px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 0 6px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo">
+        NBRM <span>FOUNDATION</span>
+    </a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="ministries.html">Ministries</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="donation.html">Donate</a>
+    </nav>
+</header>
+<section class="hero">
+    <h1>Support Our Mission</h1>
+    <p>Your generosity can bring hope and create positive change.</p>
+</section>
+
+<main class="container">
+
+    <section class="info">
+        <h2>Make a Difference</h2>
+
+        <p>
+            Every contribution can help support our community
+            initiatives and charitable activities.
+        </p>
+
+        <h3>How Your Donation Helps</h3>
+        <ul>
+            <li>Community support initiatives</li>
+            <li>Educational assistance programs</li>
+            <li>Support for people in need</li>
+            <li>Volunteer and outreach activities</li>
+        </ul>
+
+        <p style="margin-top:20px">
+            Thank you for supporting NBRM Foundation.
+        </p>
+    </section>
+
+    <section class="donation-form">
+        <h2>Donate Now</h2>
+        <p>Select your preferred donation amount.</p>
+
+        <div class="amounts">
+            <button type="button" data-amount="100">₹500</button>
+            <button type="button" data-amount="500">₹1000</button>
+            <button type="button" data-amount="1000">₹2,000</button>
+            <button type="button" data-amount="2000">₹3,000</button>
+        </div>
+
+        <main class="donation-container">
+  <form id="donationForm">
+
+            <label for="amount">Donation Amount (₹)</label>
+            <input type="number" id="amount"
+                   min="1" step="1"
+                   placeholder="Enter amount" required>
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name"
+                   placeholder="Enter your name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email"
+                   placeholder="Enter your email" required>
+
+            <label for="phone">Mobile Number</label>
+            <input type="tel" id="phone"
+                   pattern="[0-9]{10}"
+                   placeholder="10-digit mobile number" required>
+
+            <button class="donate-btn" type="submit">
+                Continue to Donate
+            </button>
+        </form>
+
+   
+        <p id="message" role="status"></p>
+    </section>
+
+</main>
+
+<!-- Fixed Donation QR Widget -->
+<div class="donate-widget">
+    <h3>❤️ Donate</h3>
+
+    <img src="scan.jpeg"
+         alt="NBRM Foundation Donation QR Code">
+
+    <p>Scan to Donate</p>
+</div>
+
+
+
+<footer>
+    <h3>NBRM Foundation</h3>
+    <p>Together, we can make a difference.</p>
+    <p>© 2026 NBRM Foundation. All rights reserved.</p>
+</footer>
+
+<script>
+const amountInput = document.getElementById("amount");
+const amountButtons = document.querySelectorAll("[data-amount]");
+
+amountButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        amountInput.value = button.dataset.amount;
+
+        amountButtons.forEach(item =>
+            item.classList.remove("active")
+        );
+
+        button.classList.add("active");
+    });
+});
+
+amountInput.addEventListener("input", () => {
+    amountButtons.forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.amount === amountInput.value
+        );
+    });
+});
+
+document.getElementById("donationForm")
+.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+   
+});
+
+document.getElementById("donationForm")
+  .addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const amount = Number(
+      document.getElementById("amount").value
+    );
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    if (amount < 1 || !name || !email ||
+        !/^[0-9]{10}$/.test(phone)) {
+      alert("Please enter valid details.");
+      return;
+    }
+
+    document.getElementById("donationSummary").textContent =
+      "Donation Amount: ₹" + amount;
+
+    document.getElementById("bankDetails").hidden = false;
+
+    document.getElementById("bankDetails")
+      .scrollIntoView({ behavior: "smooth" });
+  });
+
+
+let currentDonation = null;
+
+document.getElementById("donationForm")
+.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    currentDonation = {
+        name: document.getElementById("name").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        amount: document.getElementById("amount").value,
+        reference: "",
+        status: "Pending Verification",
+        date: new Date().toLocaleString()
+    };
+
+    document.getElementById("form").style.display = "none";
+    document.getElementById("payment").style.display = "block";
+
+    document.getElementById("details").textContent =
+        "Donation Amount: ₹" + currentDonation.amount;
+});
+
+function submitReference() {
+    const ref = document.getElementById("reference")
+        .value.trim();
+
+    if (!ref) {
+        alert("Transaction reference enter pannunga!");
+        return;
+    }
+
+    let records = JSON.parse(
+        localStorage.getItem("nbrmDonations") || "[]"
+    );
+
+    currentDonation.reference = ref;
+    currentDonation.status = "Pending Verification";
+
+    records.push(currentDonation);
+
+    localStorage.setItem(
+        "nbrmDonations",
+        JSON.stringify(records)
+    );
+
+    document.getElementById("status").textContent =
+        "Details saved. Payment verification pending.";
+
+    document.getElementById("payment").style.display = "none";
+    document.getElementById("form").style.display = "block";
+    document.getElementById("donationForm").reset();
+    document.getElementById("reference").value = "";
+    currentDonation = null;
+
+    alert("Donation details saved!");
+}
+
+function showHistory() {
+    const history = document.getElementById("history");
+    const list = document.getElementById("historyList");
+
+    history.style.display =
+        history.style.display === "block" ? "none" : "block";
+
+    if (history.style.display !== "block") return;
+
+    const records = JSON.parse(
+        localStorage.getItem("nbrmDonations") || "[]"
+    );
+
+    list.replaceChildren();
+
+    if (records.length === 0) {
+        list.textContent = "No donation records yet.";
+        return;
+    }
+
+    records.slice().reverse().forEach(function(d) {
+        const item = document.createElement("div");
+        item.className = "item";
+
+        const name = document.createElement("p");
+        name.textContent = "Name: " + d.name;
+
+        const amount = document.createElement("p");
+        amount.textContent = "Amount: ₹" + d.amount;
+
+        const date = document.createElement("p");
+        date.textContent = "Date: " + d.date;
+
+        const status = document.createElement("p");
+        status.textContent = "Status: " + d.status;
+
+        item.append(name, amount, date, status);
+        list.appendChild(item);
+    });
+}
+</script>
+
+</body>
+</html>
